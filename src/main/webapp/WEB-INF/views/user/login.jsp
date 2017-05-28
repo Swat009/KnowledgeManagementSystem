@@ -81,7 +81,7 @@ body {
 
 
 <form:label path="password" >Password:</form:label>
-<form:input class="form-control" placeholder="Password" path="password" />
+<form:input type="password" class="form-control" placeholder="Password" path="password" />
 
 <br/>
 <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login"/>

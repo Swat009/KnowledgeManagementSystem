@@ -2,6 +2,7 @@ package org.greysalmon.doa.impl;
 import java.util.List;
 
 import org.greysalmon.doa.UserDao;
+import org.greysalmon.model.Post;
 import org.greysalmon.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -54,7 +55,7 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public User find(Long userId) {
 		// TODO Auto-generated method stub
-		return (User)currentSession().get(User.class,userId);
+		return currentSession().get(User.class,userId);
 	}
 
 	@Override
@@ -86,6 +87,14 @@ public class UserDaoImpl implements UserDao{
 		}
 			
 		return user;
+	}
+	@Override
+	public List<Post> getPosts(Long userId) {
+		// TODO Auto-generated method stub
+		
+		User user=find(userId);
+		
+		return (List<Post>) user.getPosts();
 	}
 
 }

@@ -43,7 +43,12 @@
   <property name="annotatedClasses">
    <list>
     <value>org.greysalmon.model.User</value>
-    <value>org.greysalmon.model.Post</value>      
+    <value>org.greysalmon.model.Post</value>
+    <value>org.greysalmon.model.Followers</value>     
+     <value>org.greysalmon.model.User</value>
+    <value>org.greysalmon.model.Post</value>
+    <value>org.greysalmon.model.Questions</value>  
+     <value>org.greysalmon.model.Answers</value>      
    </list>
   </property>
   <property name="hibernateProperties">

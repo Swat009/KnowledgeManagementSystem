@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -16,7 +18,10 @@ public class Post
 	private long id;
 	private String title;
 	private String body;
-	private long userId;
+	//private long userId;
+	@ManyToOne
+	@JoinColumn(name="userId")
+	private User user;
 	private String username;
 	@Temporal(TemporalType.TIMESTAMP)
 	Date createdon;
@@ -53,17 +58,20 @@ public class Post
 	public void setEditedon(Date editedon) {
 		this.editedon = editedon;
 	}
-	public long getUserId() {
-		return userId;
-	}
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
+	
 	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 

@@ -1,9 +1,21 @@
 package org.greysalmon.model;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class User 
@@ -17,7 +29,21 @@ public class User
 	private String rollno;
 	private String password;
 	private int role;
-
+	private int verified;
+	private int points;
+	
+	@OneToMany(fetch = FetchType.EAGER,targetEntity=Questions.class, mappedBy="user" , cascade=CascadeType.ALL)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<Questions> questions;
+	
+	
+	@OneToMany( targetEntity=Answers.class, mappedBy="user" , cascade=CascadeType.ALL)
+	private List<Answers> ansers;
+	
+	@OneToMany( fetch = FetchType.EAGER,targetEntity=Post.class, mappedBy="user" , cascade=CascadeType.ALL)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<Post> posts;
+	
 	
 	public long getUserId() {
 		return userId;
@@ -41,6 +67,17 @@ public class User
 		return password;
 	}
 	
+	
+	public List<Post> getPosts()
+	{
+		return posts;
+	}
+	
+	
+	public List<Questions> getQuestions()
+	{
+		return questions;
+	}
 	
 	public void setPassword(String password) {
 		this.password = password;

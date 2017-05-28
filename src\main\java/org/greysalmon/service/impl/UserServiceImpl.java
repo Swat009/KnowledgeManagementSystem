@@ -3,6 +3,7 @@ package org.greysalmon.service.impl;
 import java.util.List;
 
 import org.greysalmon.doa.UserDao;
+import org.greysalmon.model.Post;
 import org.greysalmon.model.User;
 import org.greysalmon.sevice.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,14 @@ public class UserServiceImpl implements UserService {
 	public User login(User user) {
 		// TODO Auto-generated method stub
 		return userDao.login(user);
+	}
+	
+	@Override
+	public List<Post> getPosts(Long userId) {
+		// TODO Auto-generated method stub
+		
+		
+		return userDao.getPosts(userId);
 	}
 
 }

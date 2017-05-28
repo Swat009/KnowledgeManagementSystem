@@ -5,6 +5,7 @@ import java.util.List;
 import org.greysalmon.doa.PostDao;
 import org.greysalmon.doa.UserDao;
 import org.greysalmon.model.Post;
+import org.greysalmon.model.User;
 import org.greysalmon.sevice.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,12 @@ public class PostServiceImpl implements PostService{
 	public long findUser(Long id) {
 		// TODO Auto-generated method stub
 		return postDao.findUser(id);
+	}
+
+	@Override
+	public User getUser(Long id) {
+		// TODO Auto-generated method stub
+		return postDao.getUser(id);
 	}
 
 }

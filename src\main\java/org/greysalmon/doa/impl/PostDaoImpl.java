@@ -5,8 +5,10 @@ import java.util.List;
 import org.greysalmon.doa.PostDao;
 import org.greysalmon.model.Post;
 import org.greysalmon.model.User;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -57,13 +59,26 @@ public class PostDaoImpl implements PostDao
 	@Override
 	public List<Post> getAll() {
 		// TODO Auto-generated method stub
-		return currentSession().createCriteria(Post.class).list();
+		
+		Criteria crit = currentSession().createCriteria(Post.class).addOrder( Order.desc("editedon") );
+		List<Post> l=crit.list();
+		return l;
+		
 	}
 
 	@Override
 	public long findUser(Long id) {
 		Post post=find(id);
-		return post.getUserId();
+		return post.getUser().getUserId();
+	}
+	
+	@Override
+	public User getUser(Long id) {
+		// TODO Auto-generated method stub
+		
+		Post post=find(id);
+		return (User) post.getUser();
+		
 	}
 	
 

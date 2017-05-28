@@ -14,7 +14,7 @@
           <li><a href="${pageContext.request.contextPath}" id="navigate">HOME</a></li>
           <% if(session.getAttribute("user")!= null){
           
-          out.println("<li><a href=account >ACCOUNT</a></li>");
+          out.println("<li><a href=${pageContext.request.contextPath}/account >ACCOUNT</a></li>");
           out.println("<li><a href=logout >LOG OUT</a></li>");
          
           }

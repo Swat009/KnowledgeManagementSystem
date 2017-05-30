@@ -145,18 +145,27 @@ public class HelloWorldController
 		
 		if(user!=null)
 		{
+			if(user.getVerified()==0)
+			{
+				map.put("failed","Your id not verified");
+				return "redirect:/login";
+			}
 			//System.out.println(user.getRollno());
 			session.setAttribute("user",user);
 			return "redirect:/account";
 		}
+		
 		else
 		{
 			map.put("failed","Login Failed");
 			return "redirect:/login";
 		}
+		
 		}
-		else
-		return "redirect:/account";
+		else{
+			map.put("failed","");
+			return "redirect:/account";
+		}
 	}
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
 	public String logout(Map<String,Object> map,HttpSession session)
@@ -319,8 +328,9 @@ public class HelloWorldController
 	@RequestMapping(value="/admin",method=RequestMethod.GET)
 	public String admin(Map<String,Object> map,HttpSession session)
 	{
+		User u=(User) session.getAttribute("user");
 		
-		if(session.getAttribute("user")==null)
+		if(session.getAttribute("user")==null || u.getRole()!=1)
 		{
 		
 			
@@ -328,7 +338,7 @@ public class HelloWorldController
 		}
 		else
 		{
-			
+			map.put("userList",userService.getAll());
 			
 			return "user/admin";
 		}
@@ -380,7 +390,7 @@ public class HelloWorldController
 			answer.setCreatedon(d);
 			answer.setEditedon(d);
 			answersService.create(answer);
-			map.put("message","Your request has been placed.Please wait for the admin to approve your request");
+			map.put("message","Your answer has been placed.");
 			return "user/success";
 		}
 		
@@ -416,6 +426,35 @@ public class HelloWorldController
 			return "user/message";
 		}
 	}
+	
+
+	@RequestMapping(value="/allow",method=RequestMethod.POST)
+	public String allow(@RequestParam("id") long id,Map<String,Object> map,HttpSession session)
+	{
+		User us=(User) session.getAttribute("user");
+		
+		if(session.getAttribute("user")==null || us.getUserId()==0)
+		{
+		
+			
+			return "redirect:/login";
+		}
+		else
+		{
+			//User us=(User) session.getAttribute("user");
+			
+			User u=userService.find(id);
+			int v=u.getVerified()==1?0:1;
+			u.setVerified(v);
+			userService.update(u);
+			
+			
+			
+			map.put("message","success");
+			return "user/message";
+		}
+	}
+	
 	
 	
 	@RequestMapping(value="/unfollow",method=RequestMethod.POST)

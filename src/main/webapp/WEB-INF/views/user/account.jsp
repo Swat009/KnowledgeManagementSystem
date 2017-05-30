@@ -8,7 +8,7 @@
 
 <div class="col-md-12 ">
 <ul class="nav nav-tabs  nav-justified">
-  <li ><a href="createpost">Create New Post</a></li>
+  <li ><a href="account">Home</a></li>
   <li ><a href="allquestions">Questions</a></li>
   
   <li><a href="details/${user.userId}">My Account</a></li>
@@ -25,22 +25,34 @@
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-10 ">
-		<header><h3>What's going on</h3></header>
+		<header><h3>What's going on</h3></header><a class="btn btn-sucess" href="createpost">Create Post</a>
+		<div class="panel panel-default">
+  <div class="panel-heading"></div>
+  <div class="panel-body">
+  <script type="text/javascript" src="https://www.brainyquote.com/link/quotebr.js"></script>
+<small><i><a href="https://www.brainyquote.com/quotes_of_the_day.html" target="_blank" rel="nofollow">more Quotes</a></i></small>
+  
+  
+  </div>
+</div>
+		
 		<c:forEach items="${posts}" var="post">
 		<article class="post" data-postid="${post.id}">
-		<h2>${post.title}</h2>	
+		
+		<div class="panel panel-default">
+		<div class="panel-heading">${post.title}</div>
+		  <div class="panel-body">
 		<p>${post.body}</p>
 		<div class="info">
 			Posted by ${post.username} on ${post.createdon}
 		</div>
-		<div class="interaction">
-		<a href="#" class="like" >Like</a>|
-		<a href="#" class="like" >Dislike</a>|
+		</div>
 		</div>
 		</article>
 		</c:forEach>
 		</div>
 		<div class="col-md-1">
+		
 		</div>
 		
 

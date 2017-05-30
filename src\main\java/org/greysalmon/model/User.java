@@ -28,9 +28,9 @@ public class User
 	@Size(min=10,max=10)
 	private String rollno;
 	private String password;
-	private int role;
-	private int verified;
-	private int points;
+	private int role=0;
+	private int verified=0;
+	private int points=0;
 	
 	@OneToMany(fetch = FetchType.EAGER,targetEntity=Questions.class, mappedBy="user" , cascade=CascadeType.ALL)
 	@Fetch(value = FetchMode.SUBSELECT)
@@ -81,6 +81,24 @@ public class User
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public int getRole() {
+		return role;
+	}
+	public void setRole(int role) {
+		this.role = role;
+	}
+	public int getVerified() {
+		return verified;
+	}
+	public void setVerified(int verified) {
+		this.verified = verified;
+	}
+	public int getPoints() {
+		return points;
+	}
+	public void setPoints(int points) {
+		this.points = points;
 	}
 	
 	

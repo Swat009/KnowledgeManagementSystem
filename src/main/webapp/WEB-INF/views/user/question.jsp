@@ -36,10 +36,10 @@
 	
 	for(Answers ans:a)
 	{
-		out.println("<p>"+ans.getBody()+"</p>");
+		out.println("<div class='panel panel-default'><div class='panel-body'><p>"+ans.getBody()+"</p></div>");
 		
 		User u=(User)ans.getUser();
-		out.println("Answer by "+u.getName()+"<br/>");
+		out.println("<div class='panel-footer'>Answer by "+u.getName()+"</div></div>");
 		
 	}
 

@@ -68,7 +68,14 @@ body {
  <div class="container">
 
       <br/>
-        
+ <%
+ 
+ String f=(String)request.getAttribute("failed");
+ 
+ if(f!=null)
+ out.println(f);
+ 
+ %>       
        
    
 

@@ -21,12 +21,15 @@
 		
 		<a href="question/${question.qid}" style="text-decoration:none;color:black;">
 		<article class="question" data-postid="${question.qid}">
-		<h2>${question.title}</h2>	
-		<p>${question.body}</p>
+		<div class="panel panel-default">
+  <div class="panel-heading">${question.title}</div>
+		
+		<div class="panel-body"><p>${question.body}</p>
 		<div class="info">
 			Asked by ${question.username} on ${question.createdon}
 		</div>
-		
+		</div>
+		</div>
 		</article>
 		</a>
 		</c:forEach>

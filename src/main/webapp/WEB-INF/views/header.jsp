@@ -39,6 +39,9 @@ body {
   line-height: 60px; /* Vertically center the text there */
   background-color: #f5f5f5;
 }
+.glyphicon {
+font-size: 170px;
+}
 
 
 </style>

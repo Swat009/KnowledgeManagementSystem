@@ -1,5 +1,8 @@
 package org.greysalmon.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,8 @@ import org.greysalmon.sevice.FollowersService;
 import org.greysalmon.sevice.PostService;
 import org.greysalmon.sevice.QuestionsService;
 import org.greysalmon.sevice.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,6 +31,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 @Controller
 public class HelloWorldController
 {
@@ -47,6 +53,8 @@ public class HelloWorldController
 	AnswersService answersService;
 	
 	
+	private static final Logger LOGGER=LoggerFactory.getLogger(HelloWorldController.class);
+	private String uploadfolder="/uploads";
 	@RequestMapping(value="/" , method=RequestMethod.GET)
 	public String sayHello(ModelMap model)
 	{
@@ -119,6 +127,8 @@ public class HelloWorldController
 		return "user/following";
 	}
 	
+	
+	
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String login(Map<String,Object> map,HttpSession session)
 	{
@@ -184,6 +194,7 @@ public class HelloWorldController
 			
 			return "user/login";
 		}
+		map.put("followingList",followersService.getAll());
 		map.put("posts",postService.getAll() );
 		//map.put("user",new User());
 		return "user/account";
@@ -366,6 +377,67 @@ public class HelloWorldController
 		
 	}
 	
+	@RequestMapping(value="/upload",method=RequestMethod.GET)
+	public String upload(Map<String,Object> map,HttpSession session)
+	{
+		
+		if(session.getAttribute("user")==null)
+		{
+			map.put("user",new User());
+			
+			return "redirect:/login";
+		}
+		else
+		{
+			return "user/upload";
+		}
+		
+	}
+	
+	@RequestMapping(value="/files",method=RequestMethod.GET)
+	public String files(Map<String,Object> map,HttpSession session)
+	{
+		
+		return "user/files";
+		
+	}
+	
+	@RequestMapping(value="/upload",method=RequestMethod.POST)
+	public String uploadprocess(@RequestParam("myfile") CommonsMultipartFile file,Map<String,Object> map,HttpSession session)
+	{
+		String path=session.getServletContext().getRealPath("/uploads");
+		System.err.println(path);
+		String filename=file.getOriginalFilename();
+		if(session.getAttribute("user")==null)
+		{
+			map.put("user",new User());
+			
+			return "redirect:/login";
+		}
+		else
+		{
+			try
+			{
+				byte bar[]=file.getBytes();
+				BufferedOutputStream bout=new BufferedOutputStream(new FileOutputStream(path+"/"+filename));
+				Object o=bout;
+				bout.write(bar);
+				bout.flush();
+				bout.close();
+				
+			}
+			catch(Exception e)
+			{
+				System.err.println(e);
+			}
+			
+			map.put("message","File upload sucessful.We will add it to our list once verified");
+			return "user/success";
+			
+		}
+		
+	}
+	
 	
 	@RequestMapping(value="/createanswer",method=RequestMethod.POST)
 	public String createanswer(Answers answer,Map<String,Object> map,HttpSession session)
@@ -485,6 +557,8 @@ public class HelloWorldController
 			return "user/message";
 		}
 	}
+	
+	
 
 
 }

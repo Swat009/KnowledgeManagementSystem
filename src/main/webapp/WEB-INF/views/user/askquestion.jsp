@@ -7,7 +7,7 @@
 <section class="row new-post">
 		<div class="col-md-6 col-md-offset-3">
 
-		<header><h3>What do you have to say?</h3></header>
+		<header><h3>Give a heading and brief description of your question</h3></header>
 		<c:url var="action" value="/createquestion" ></c:url>
 		<form:form action="${action}" method="post" modelAttribute="post">
 			

@@ -14,7 +14,7 @@
 		</div>
 		<div class="col-md-10 ">
 		
-		<h3><a href="askquestion"><span class="glyphicon glyphicon-search"></span>&nbsp; Ask a Question</a></h3>
+		<h3><a href="askquestion">&nbsp; Ask a Question</a></h3>
 		
 		<header><h3>All questions </h3></header>
 		<c:forEach items="${questions}" var="question">

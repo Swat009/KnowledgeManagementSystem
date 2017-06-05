@@ -14,14 +14,14 @@
           <li><a href="${pageContext.request.contextPath}" id="navigate">HOME</a></li>
           <% if(session.getAttribute("user")!= null){
           
-          out.println("<li><a href=${pageContext.request.contextPath}/account >ACCOUNT</a></li>");
-          out.println("<li><a href=logout >LOG OUT</a></li>");
+          out.println("<li><a href='http://localhost:8080/KnowledgeManagement/account' >ACCOUNT</a></li>");
+          out.println("<li><a href='http://localhost:8080/KnowledgeManagement/logout' >LOG OUT</a></li>");
          
           }
           else{
           
-        	  out.println("<li><a href=login >LOG IN</a></li>");
-              out.println("<li><a href=register >REGISTER</a></li>");
+        	  out.println("<li><a href='http://localhost:8080/KnowledgeManagement/login' >LOG IN</a></li>");
+              out.println("<li><a href='http://localhost:8080/KnowledgeManagement/register' >REGISTER</a></li>");
           }
           
           %>
